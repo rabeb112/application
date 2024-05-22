@@ -1,17 +1,27 @@
-package com.example.myapp
+package com.example.myapp;
 
-import android.os.Build
-import android.os.Bundle
+import android.os.Build;
+import android.os.Bundle;
+import org.devio.rn.splashscreen.SplashScreen;
+import com.facebook.react.ReactActivity;
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled;
+import com.facebook.react.defaults.DefaultReactActivityDelegate;
 
-import com.facebook.react.ReactActivity
-import com.facebook.react.ReactActivityDelegate
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
-import com.facebook.react.defaults.DefaultReactActivityDelegate
+import expo.modules.ReactActivityDelegateWrapper;
 
-import expo.modules.ReactActivityDelegateWrapper
+public class MainActivity : ReactActivity() {
+  @Override
+protected void onCreate(Bundle savedInstanceState) {
+    SplashScreen.show(this);
+    super.onCreate(savedInstanceState);
+}
 
-class MainActivity : ReactActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
+  @override
+  protected String getMainComponentName(){
+    return "example.myapp";
+  }
+  @override fun onCreate(savedInstanceState: Bundle?) {
     // Set the theme to AppTheme BEFORE onCreate to support
     // coloring the background, status bar, and navigation bar.
     // This is required for expo-splash-screen.
@@ -29,7 +39,7 @@ class MainActivity : ReactActivity() {
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
    * which allows you to enable New Architecture with a single boolean flags [fabricEnabled]
    */
-  override fun createReactActivityDelegate(): ReactActivityDelegate {
+  @override fun createReactActivityDelegate(): ReactActivityDelegate {
     return ReactActivityDelegateWrapper(
           this,
           BuildConfig.IS_NEW_ARCHITECTURE_ENABLED,
@@ -45,7 +55,7 @@ class MainActivity : ReactActivity() {
     * where moving root activities to background instead of finishing activities.
     * @see <a href="https://developer.android.com/reference/android/app/Activity#onBackPressed()">onBackPressed</a>
     */
-  override fun invokeDefaultOnBackPressed() {
+  @override fun invokeDefaultOnBackPressed() {
       if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
           if (!moveTaskToBack(false)) {
               // For non-root activities, use the default implementation to finish them.

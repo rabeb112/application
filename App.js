@@ -1,17 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, TextInput, View, button } from 'react-native';
-import signInScreen from './src/screens/signInScreen/signInScreen';
-const App = () => {
-  return(
-    <SafeAreaView style={ styles.root}>
-      <signInScreen/>
-    </SafeAreaView>
-  )
-}
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import {AppNavigator} from './src/AppNavigator';
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+  );
+}
